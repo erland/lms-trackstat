@@ -335,9 +335,9 @@ sub setMode()
 	my @listRef = ();
 	my $statistics = getStatisticPlugins();
 
-	my $licenseManager = isPluginsInstalled($client,'LicenseManagerPlugin');
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	my $licensed = $validateRequest->getResult("result");
+	my $licenseManager = 1; #isPluginsInstalled($client,'LicenseManagerPlugin');
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	my $licensed = 1; #$validateRequest->getResult("result");
 
 	if($licenseManager && $licensed) {
 		my $statistictype = $client->modeParam('statistictype');
@@ -1370,9 +1370,9 @@ sub baseWebPage {
 		$params->{'pluginTrackStatSlimserver70'} = 1;
 	}
 	$params->{'pluginTrackStatVersion'} = $PLUGINVERSION;
-	$params->{'licensemanager'} = Plugins::TrackStat::Plugin::isPluginsInstalled($client,'LicenseManagerPlugin');
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	$params->{'licensed'} = $validateRequest->getResult("result");
+	$params->{'licensemanager'} = 1; #Plugins::TrackStat::Plugin::isPluginsInstalled($client,'LicenseManagerPlugin');
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	$params->{'licensed'} = 1; #$validateRequest->getResult("result");
 
 	$log->debug("Exiting baseWebPage\n");
 }
@@ -1756,22 +1756,22 @@ sub getStatisticPlugins {
 sub getSQLPlayListPlaylists {
 	my $client = shift;
 	my $pluginVersion = shift;
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	if(!$validateRequest->getResult("result")) {
-		my @empty = ();
-		return \@empty;
-	}
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	#if(!$validateRequest->getResult("result")) {
+	#	my @empty = ();
+	#	return \@empty;
+	#}
 	return Plugins::TrackStat::Template::Reader::getTemplates($client,'TrackStat',$pluginVersion,'PluginCache/SQLPlayList','Playlists','xml','template','playlist','simple',1);
 }
 
 sub getSQLPlayListTemplates {
 	my $client = shift;
 	my $pluginVersion = shift;
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	if(!$validateRequest->getResult("result")) {
-		my @empty = ();
-		return \@empty;
-	}
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	#if(!$validateRequest->getResult("result")) {
+	#	my @empty = ();
+	#	return \@empty;
+	#}
 	return Plugins::TrackStat::Template::Reader::getTemplates($client,'TrackStat',$pluginVersion,'PluginCache/SQLPlayList','PlaylistTemplates','xml');
 }
 sub getDatabaseQueryTemplates {
@@ -1789,44 +1789,44 @@ sub getDatabaseQueryDataQueries {
 sub getCustomBrowseTemplates {
 	my $client = shift;
 	my $pluginVersion = shift;
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	if(!$validateRequest->getResult("result")) {
-		my @empty = ();
-		return \@empty;
-	}
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	#if(!$validateRequest->getResult("result")) {
+	#	my @empty = ();
+	#	return \@empty;
+	#}
 	return Plugins::TrackStat::Template::Reader::getTemplates($client,'TrackStat',$pluginVersion,'PluginCache/CustomBrowse','MenuTemplates','xml');
 }
 
 sub getCustomBrowseContextTemplates {
 	my $client = shift;
 	my $pluginVersion = shift;
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	if(!$validateRequest->getResult("result")) {
-		my @empty = ();
-		return \@empty;
-	}
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	#if(!$validateRequest->getResult("result")) {
+	#	my @empty = ();
+	#	return \@empty;
+	#}
 	return Plugins::TrackStat::Template::Reader::getTemplates($client,'TrackStat',$pluginVersion,'PluginCache/CustomBrowse','ContextMenuTemplates','xml');
 }
 
 sub getCustomBrowseMenus {
 	my $client = shift;
 	my $pluginVersion = shift;
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	if(!$validateRequest->getResult("result")) {
-		my @empty = ();
-		return \@empty;
-	}
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	#if(!$validateRequest->getResult("result")) {
+	#	my @empty = ();
+	#	return \@empty;
+	#}
 	return Plugins::TrackStat::Template::Reader::getTemplates($client,'TrackStat',$pluginVersion,'PluginCache/CustomBrowse','Menus','xml','template','menu','simple',1);
 }
 
 sub getCustomBrowseContextMenus {
 	my $client = shift;
 	my $pluginVersion = shift;
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	if(!$validateRequest->getResult("result")) {
-		my @empty = ();
-		return \@empty;
-	}
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	#if(!$validateRequest->getResult("result")) {
+	#	my @empty = ();
+	#	return \@empty;
+	#}
 	my $result = Plugins::TrackStat::Template::Reader::getTemplates($client,'TrackStat',$pluginVersion,'PluginCache/CustomBrowse','ContextMenus','xml','template','menu','simple',1);
 	if($result) {
 		for my $item (@$result) {
@@ -1848,11 +1848,11 @@ sub replaceMenuParameters {
 sub getCustomBrowseMixes {
 	my $client = shift;
 	my $pluginVersion = shift;
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	if(!$validateRequest->getResult("result")) {
-		my @empty = ();
-		return \@empty;
-	}
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	#if(!$validateRequest->getResult("result")) {
+	#	my @empty = ();
+	#	return \@empty;
+	#}
 	return Plugins::TrackStat::Template::Reader::getTemplates($client,'TrackStat',$pluginVersion,'PluginCache/CustomBrowse','Mixes','xml','mix');
 }
 
@@ -1926,10 +1926,10 @@ sub getDatabaseQueryDataQueryData {
 
 sub getCustomSkipFilterTypes {
 	my @result = ();
-	my $validateRequest = Slim::Control::Request::executeRequest(undef,['licensemanager','validate','application:TrackStat']);
-	if(!$validateRequest->getResult("result")) {
-		return \@result;
-	}
+	#my $validateRequest = Slim::Control::Request::executeRequest(undef,['licensemanager','validate','application:TrackStat']);
+	#if(!$validateRequest->getResult("result")) {
+	#	return \@result;
+	#}
 	my %rated = (
 		'id' => 'trackstat_rated',
 		'name' => 'Rated (TrackStat)',
@@ -3090,9 +3090,9 @@ sub jiveBrowse {
 		return;
 	}
 
-	my $licenseManager = isPluginsInstalled($client,'LicenseManagerPlugin');
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	my $licensed = $validateRequest->getResult("result");
+	my $licenseManager = 1; #isPluginsInstalled($client,'LicenseManagerPlugin');
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	my $licensed = 1; #$validateRequest->getResult("result");
 
 	if($licenseManager && $licensed) {
 		my $params = $request->getParamsCopy();
@@ -3216,9 +3216,9 @@ sub jiveStatistics {
 		return;
 	}
 
-	my $licenseManager = isPluginsInstalled($client,'LicenseManagerPlugin');
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	my $licensed = $validateRequest->getResult("result");
+	my $licenseManager = 1; #isPluginsInstalled($client,'LicenseManagerPlugin');
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	my $licensed = 1; #$validateRequest->getResult("result");
 
 	if($licenseManager && $licensed) {
 		my $params = $request->getParamsCopy();
@@ -5201,10 +5201,10 @@ sub getDynamicPlayLists {
 
 	return \%result unless $prefs->get("dynamicplaylist");
 	
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	if(!$validateRequest->getResult("result")) {
-		return \%result;
-	}
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	#if(!$validateRequest->getResult("result")) {
+	#	return \%result;
+	#}
 
 	my $statistics = getStatisticPlugins();
 	for my $item (keys %$statistics) {

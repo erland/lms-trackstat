@@ -62,9 +62,9 @@ sub handler {
 			$currentSubPages{$page->{'name'}} = $page->{'page'};
 		}
 	}
-	$params->{'licensemanager'} = Plugins::TrackStat::Plugin::isPluginsInstalled($client,'LicenseManagerPlugin');
-	my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
-	$params->{'licensed'} = $validateRequest->getResult("result");
+	$params->{'licensemanager'} = 1; #Plugins::TrackStat::Plugin::isPluginsInstalled($client,'LicenseManagerPlugin');
+	#my $validateRequest = Slim::Control::Request::executeRequest($client,['licensemanager','validate','application:TrackStat']);
+	$params->{'licensed'} = 1; #$validateRequest->getResult("result");
 	$params->{'subpages'} = \%currentSubPages;
 	$params->{'subpage'} = $class->currentPage($client,$params);
 	$params->{'supportsMixers'} = $::VERSION lt '7.6';

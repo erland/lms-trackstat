@@ -159,9 +159,9 @@ sub getCustomScanFunctions {
 		);
 		push @$properties,\%dynamiclibrary,
 	}
-	my $licenseManager = Plugins::TrackStat::Plugin::isPluginsInstalled(undef,'LicenseManagerPlugin');
-	my $request = Slim::Control::Request::executeRequest(undef,['licensemanager','validate','application:TrackStat']);
-	my $licensed = $request->getResult("result");
+	my $licenseManager = 1; #Plugins::TrackStat::Plugin::isPluginsInstalled(undef,'LicenseManagerPlugin');
+	#my $request = Slim::Control::Request::executeRequest(undef,['licensemanager','validate','application:TrackStat']);
+	my $licensed = 1; #$request->getResult("result");
 	if(!$licensed) {
 		$functions{'licensed'} = 0;
 	}
